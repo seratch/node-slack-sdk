@@ -159,22 +159,29 @@ export interface ChatMeMessageArguments extends WebAPICallOptions, TokenOverrida
   channel: string;
   text: string;
 }
-export interface ChatPostEphemeralArguments extends WebAPICallOptions, TokenOverridable {
+export interface ChatPostEphemeralCommonArguments extends WebAPICallOptions, TokenOverridable {
   channel: string;
-  text: string;
   user: string;
   as_user?: boolean;
-  attachments?: MessageAttachment[];
-  blocks?: (KnownBlock | Block)[];
   link_names?: boolean;
   parse?: 'full' | 'none';
 }
-export interface ChatPostMessageArguments extends WebAPICallOptions, TokenOverridable {
-  channel: string;
+export type ChatPostEphemeralTextArguments = ChatPostEphemeralCommonArguments & {
   text: string;
+};
+export type ChatPostEphemeralAttachmentsArguments = ChatPostEphemeralCommonArguments & {
+  attachments: MessageAttachment[];
+};
+export type ChatPostEphemeralBlocksArguments = ChatPostEphemeralCommonArguments & {
+  blocks: (KnownBlock | Block)[];
+};
+export type ChatPostEphemeralArguments = ChatPostEphemeralTextArguments
+  | ChatPostEphemeralAttachmentsArguments
+  | ChatPostEphemeralBlocksArguments;
+
+export interface ChatPostMessageCommonArguments extends WebAPICallOptions, TokenOverridable {
+  channel: string;
   as_user?: boolean;
-  attachments?: MessageAttachment[];
-  blocks?: (KnownBlock | Block)[];
   icon_emoji?: string; // if specified, as_user must be false
   icon_url?: string;
   link_names?: boolean;
@@ -186,13 +193,23 @@ export interface ChatPostMessageArguments extends WebAPICallOptions, TokenOverri
   unfurl_media?: boolean;
   username?: string; // if specified, as_user must be false
 }
-export interface ChatScheduleMessageArguments extends WebAPICallOptions, TokenOverridable {
-  channel: string;
+export type ChatPostMessageTextArguments = ChatPostMessageCommonArguments & {
   text: string;
+};
+export type ChatPostMessageAttachmentsArguments = ChatPostMessageCommonArguments & {
+  attachments: MessageAttachment[];
+};
+export type ChatPostMessageBlocksArguments = ChatPostMessageCommonArguments & {
+  blocks: (KnownBlock | Block)[];
+};
+export type ChatPostMessageArguments = ChatPostMessageTextArguments
+  | ChatPostMessageAttachmentsArguments
+  | ChatPostMessageBlocksArguments;
+
+export interface ChatScheduleMessageCommonArguments extends WebAPICallOptions, TokenOverridable {
+  channel: string;
   post_at: string;
   as_user?: boolean;
-  attachments?: MessageAttachment[];
-  blocks?: (KnownBlock | Block)[];
   link_names?: boolean;
   parse?: 'full' | 'none';
   reply_broadcast?: boolean; // if specified, thread_ts must be set
@@ -200,6 +217,19 @@ export interface ChatScheduleMessageArguments extends WebAPICallOptions, TokenOv
   unfurl_links?: boolean;
   unfurl_media?: boolean;
 }
+export type ChatScheduleMessageTextArguments = ChatScheduleMessageCommonArguments & {
+  text: string;
+};
+export type ChatScheduleMessageAttachmentsArguments = ChatScheduleMessageCommonArguments & {
+  attachments: MessageAttachment[];
+};
+export type ChatScheduleMessageBlocksArguments = ChatScheduleMessageCommonArguments & {
+  blocks: (KnownBlock | Block)[];
+};
+export type ChatScheduleMessageArguments = ChatScheduleMessageTextArguments
+  | ChatScheduleMessageAttachmentsArguments
+  | ChatScheduleMessageBlocksArguments;
+
 export interface ChatScheduledMessagesListArguments extends WebAPICallOptions, TokenOverridable,
   CursorPaginationEnabled {
   channel: string;
