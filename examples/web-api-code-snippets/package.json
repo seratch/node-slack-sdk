@@ -1,0 +1,14 @@
+{
+  "name": "@slack/web-api-code-snippets",
+  "description": "Basic examples of using @slack/web-api package",
+  "main": "api_test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": "https://github.com/slackapi/node-slack-sdk",
+  "author": "Slack Technologies, Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^4"
+  }
+}
