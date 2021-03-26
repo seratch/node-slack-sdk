@@ -2,7 +2,7 @@
 
 This project is a collection of simple `WebClient` examples. The maintainers of this project may add some specific examples for integration tests with the Slack server-side.
 
-### How to run
+### How to run the snippets
 
 ```bash
 npm i
